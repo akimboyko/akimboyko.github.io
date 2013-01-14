@@ -1,0 +1,275 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>AOP by example for #kievaltnet by @AkimBoyko</title>
+    
+    <meta name="description" content="AOP by example presentation" />
+    <meta name="author" content="Akim Boyko" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <link href="css/aop-by-examples.css" rel="stylesheet" />
+    
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+    <div id="title" class="step" data-x="0" data-y="0" data-scale="4">
+        <h1><font class="red">A</font>spect-<br/><font class="red">O</font>riented<br/><font class="red">P</font>rogramming</h1>
+        <p>by examples</p>
+        <p align='right'>@AkimBoyko</p>
+    </div>
+
+    <div id="Slogan" class="step" data-x="1000" data-y="0" data-scale="1">
+        A well-written program is a program where the cost of implementing a feature is constant throughout the program's lifetime<br/>
+        <p align='right'>Itay Maman</p>
+    </div>
+
+    <div id="WordsDefinition01" class="step" data-x="+2000" data-y="0" data-scale="1">
+        <p><strong>Aspect</strong>: appearance, visible form, the action of looking at appearance to the eye or mind</p>
+        <p><strong>Advice</strong>: an opinion or a suggestion about what somebody should do in a particular situation</p>
+        <p><strong>Weaver</strong>: a person whose job is weaving cloth</p>
+        <p><strong>Composition</strong>: the combining of distinct parts or elements to form a whole</p>
+    </div>
+
+    <div id="WordsDefinition02" class="step" data-x="+3000" data-y="0" data-scale="1">
+        <p><strong>Intercept</strong>: to stop, deflect, or interrupt the progress or intended course o</p>
+        <p><strong>Scattering</strong>: the dispersal of a beam of particles or of radiation into a range of directions as a result of physical interactions; placed irregularly and far apart</p>
+        <p><strong>Tangling</strong>: To mix together or intertwine in a confused mass</p>
+    </div>
+
+    <div id="StackOverflowAboutAop" class="step" data-x="+4000" data-y="0" data-rotate="0" data-scale="1">
+        <img src="images\aspect-oriented-stackoverflow.png" width="800px"/>
+    </div>
+
+    <div id="WhenToApplyAOP" class="step" data-x="+5500" data-y="0" data-rotate="-90" data-scale="1">
+        <h1>When to apply?</h1>
+    </div>
+
+    <div id="CodeSymptoms" class="step" data-x="+6000" data-y="0" data-scale="1">
+        <ul>
+            <li><em>Code</em> Tangling</li>
+            <li><em>Code</em> Scattering</li>
+            <li><em>Code</em> Coupling</li>
+            <li>Boilerplate <em>code</em></li>
+        </ul>
+    </div>
+
+    <div id="CrossCuttingConcerns" class="step" data-x="+6800" data-y="0" data-rotate="-90" data-scale="1">
+        <h1>Cross-Cutting concerns</h1>
+    </div>
+    
+    <div id="CrossCuttingConcernsSample" class="step" data-x="+6400" data-y="0" data-scale="1">
+        <ul>
+            <li>Logging and Monitoring</li>
+            <li>Performance analysis</li>
+            <li>Debugging and Tracing</li>
+            <li>Undo Functionality</li>
+            <li>Validation of inputs and outputs</li>
+            <li>Morphing the behavior of existing objects</li>
+            <li>Object Filters</li>
+            <li>Security Implementation</li>
+            <li>Managing transactions</li>
+        </ul>
+    </div>
+
+    <div id="DemoPrototypeTangledAspects" class="step" data-x="+6150" data-y="+400" data-rotate="0" data-scale="1">
+        <a href='images/prototype → tangled → aspects.png' class="code">
+            Demo #0: prototype → tangled → aspects
+        </a>
+    </div>  
+
+    <div id="CrossCuttingConcernsAndCodeSymptomsOverview" class="step" data-x="+6150" data-y="0" data-rotate="0" data-scale="1">
+    </div>  
+
+    <div id="AOPwoAOP" class="step" data-x="+7500" data-y="0" data-rotate="-90" data-scale="1">
+        <h1>AOP w/o AOP</h1>
+        Is it possible at all? <em>Déjà vu</em>
+    </div>
+
+    <div id="AOPwoAOPSample" class="step" data-x="+8000" data-y="0" data-scale="1">
+        <ul>
+            <li>
+                <strong>Proxy and Decorator</strong>
+                <ul>
+                    <li>nHiberante: Lazy Loading</li>
+                    <li>DI containers: Interceptors</li>
+                </ul>
+            </li>
+            <li>
+                <strong>ASP.NET MVC Action Filter</strong>
+                <ul>
+                    <li><p class="code">IAuthorizationFilter: OnAuthorization()</p></li>
+                    <li><p class="code">IActionFilter: OnActionExecuted(), OnActionExecuting()</p></li>
+                    <li><p class="code">IExceptionFilter: OnException()</p></li>
+                </ul>
+            </li>
+            <li><strong>Code Contract</strong></li>
+            <li class="demo">Demo #1</li>
+        </ul>
+    </div>
+
+    <div id="PoorMansAOP" class="step" data-x="+8500" data-y="0" data-rotate="-90" data-scale="1">
+        <h1>Poor man's AOP</h1>
+    </div>
+
+    <div id="DecoratorPattern" class="step" data-x="+9000" data-y="0" data-rotate="0" data-scale="1">
+        <ul>
+            <li><strong>Decorator</strong>: extend an instance without changing class</li>
+            <li><strong>Proxy</strong>: substitute initial instance</li>
+            <li class="demo">Demo #2</li>
+        </ul>
+    </div>
+
+    <div id="SolidAndDry" class="step" data-x="+10000" data-y="0" data-rotate="0" data-scale="1">
+        <div>
+            <ul>
+                <li><strong><font class="red">S</font>ingle responsibility</strong></li>
+                <li><strong><font class="red">O</font>pen/closed</strong></li>
+                <li><strong><font class="red">L</font>iskov substitution</strong></li>
+                <li><em><strike><font class="red">I</font>nterface segregation</strike></em></li>
+                <li><font class="red">D</font>ependency inversion</li>
+                <li><strong><font class="red">D</font>on't&nbsp;<font class="red">R</font>epeat&nbsp;<font class="red">Y</font>ourself</strong></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="AopComponents" class="step" data-x="+11000" data-y="0" data-rotate="-90" data-scale="1">
+        <h1>AOP components</h1>
+    </div>
+
+    <div id="AopPartsDetails" class="step" data-x="+11500" data-y="0" data-scale="1">
+        <ul>
+            <li><strong>Component language</strong></li>
+            <li><strong>Aspect language</strong></li>
+            <li><strong>Aspect weaver</strong></li>
+            <li><strong>Aspect life time</strong></li>
+            <li class="demo">Demo #3: Aspect, IL and weaving and Dynaminc Interceptor</li>
+        </ul>
+    </div>
+
+    <div id="AopPartsInPractice" class="step" data-x="+12500" data-y="0" data-scale="1">
+        <ul>
+            <li>Describe the <strong>transformation</strong>.</li>
+            <li><strong>Apply</strong> the transformation to the business code.</li>
+            <li>Because there are <strong>two phases</strong> we <strong>separate</strong> all the aspect code from the business code.
+                Get nice <strong>separation of concerns</strong> and principally nice business code.</li>
+        </ul>
+        <p align='right'>Gael Fraiteur</p>
+    </div>
+
+    <div id="AopExamples" class="step" data-x="+14000" data-y="0" data-rotate="-90" data-scale="1">
+        <h1>AOP Examples</h1>
+    </div>
+
+    <div id="AopExamplesDetails" class="step" data-x="+14500" data-y="0" data-scale="1">
+        <h1 class="demo">Demo #4</h1>
+        <ul>
+            <li>Authorization/Authentication</li>
+            <li>Parameters Validation</li>
+            <li>Auditing/Affiliation</li>
+            <li>Transaction handling</li>
+            <li>Inject dependencies into aspect</li>
+            <li>Architecture Validation</li>
+            <li>Modify external libraries calls</li>
+        </ul>
+    </div>
+
+    <div id="AopExamplesOthers" class="step" data-x="+15500" data-y="0" data-scale="1">
+        <strong>Other examples</strong>
+        <ul>
+            <li>Declarative threading</li>
+            <li>Circuit breaker</li>
+            <li>Deadlocks detection</li>
+            <li>Error handling</li>
+            <li>… and a lot more</li>
+        </ul>
+    </div>
+
+    <div id="PostCompileVsRuntime" class="step" data-x="+16000" data-y="0" data-rotate="-90" data-scale="1">
+        <h1>Post-compile vs. Runtime</h1>
+    </div>
+
+    <div id="PostCompileVsRuntimeAopBullets" class="step" data-x="+16500" data-y="0" data-scale="1">
+        <strong>PostSharp vs. Castle Dynamic Proxy</strong>
+        <ul>
+            <li><strong>Run-time performance</strong></li>
+            <li><strong>Interception</strong></li>
+            <li>Interface/virtual functions</li>
+            <li>No need to recompile</li>
+            <li><strong>Post-compilation</strong></li>
+            <li>WCF services and WPF forms, no way to hide behind proxy</li>
+            <li>Lack of information during compile-time</li>
+        </ul>
+    </div>
+
+    <div id="AopAndTesting" class="step" data-x="+17500" data-y="0" data-rotate="-90" data-scale="1">
+        <h1>AOP and testing</h1>
+    </div>
+
+    <div id="AopAndTestingBullets" class="step" data-x="+18000" data-y="0" data-scale="1">
+        <ul>
+            <li>Testing of separate aspects in isolation</li>
+            <li>Testing of aspect composition and configuration</li>
+            <li>Post-compilation: Need to manually create classes to apply aspects</li>
+        </ul>
+    </div>
+
+    <div id="AopAsAntiPatter" class="step" data-x="+19000" data-y="0" data-rotate="-90" data-scale="1">
+        <h1>AOP as anti-patter and alternatives</h1>
+    </div>
+
+    <div id="AopAsAntiPatterBullets" class="step" data-x="+19500" data-y="0" data-scale="1">
+        <ul>
+            <li>Black magic or silver bullet? Neither!</li>
+            <li>AOP vs. Dependency Injection</li>
+            <li>AOP Weaver vs. Interfaces Decoration</li>
+            <li>Aspects vs. Convension over Configuration</li>
+            <li>B/L in AOP</li>
+            <li>CI server integration</li>
+        </ul>
+    </div>
+
+    <div id="ResourcesAboutAop" class="step" data-x="+20500" data-y="0" data-rotate="-90" data-scale="1">
+        <h1>Resources</h1>
+    </div>
+
+    <div id="ResourcesAboutAopList" class="step" data-x="+21000" data-y="0" data-scale="1">
+        <ul>
+            <li><a href='http://cseweb.ucsd.edu/~wgg/CSE218/aop-ecoop97.pdf'>Aspect-Oriented Programming by Gregor Kiczales</a></li>
+            <li><a href='http://www.manning.com/groves/'>AOP in .NET by Matthew D. Groves</a></li>
+            <li><a href='http://www.manning.com/seemann/'>Dependency Injection in .NET by Mark Seemann</a></li>
+            <li><a href='http://www.dotnetrocks.com/'>.Net Rocks! podcasts: AOP at NDC; PostSharp</a></li>
+            <li><a href='http://www.hanselminutes.com/213/aspect-oriented-programming-aop-and-linfu-with-philip-laureano'>The Hanselminutes Podcast #213: LinFu with Philip Laureano</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>
