@@ -1,0 +1,233 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Metaprogramming in .NET: Microsoft® “Roslyn” CTP by @AkimBoyko</title>
+    
+    <meta name="description" content="Metaprogramming in .NET: Microsoft® “Roslyn” CTP by Akim Boyko" />
+    <meta name="author" content="Akim Boyko" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <link href="css/metaprogramming.css" rel="stylesheet" />
+    
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+    <div id="title" class="step" data-x="-200" data-y="0" data-scale="4">
+        <h1>Metaprogramming in .NET</h1>
+        <h2>Microsoft® “Roslyn” CTP</h2>
+        <p class='right'>by <em>@AkimBoyko</em></p>
+        <p class='right'><a href="https://github.com/akimboyko/MetaProgramming">GitHub repository</a></p>
+    </div>
+
+    <div id="WordsDefinitions" class="step" data-x="+2000" data-y="0" data-scale="1">
+        <p><strong>μετά</strong>: after, beyond, self, adjacent</p>
+        <p><strong>metaprogramming</strong>: The classic definition for a metaprogram is “a computer program that writes new computer programs”
+            <br/>
+            by <em>@KevinHazzard</em> and <em>@JasonBock</em></p>
+    </div>
+
+    <div id="JavaScriptEvalAsMetaprogrammingExample" class="step" data-x="+3000" data-y="0" data-scale="1">
+        <p>JavaScript <strong class="code">eval()</strong> as metaprogramming <a href='..\Snippets\JsEvalSample.html'>example</a></p>
+        <p>from Metaprogramming in .Net by <em>@KevinHazzard</em> and <em>@JasonBock</em></p>
+    </div>
+
+    <div id="JavaScriptEvalAsMetaprogrammingExample01" class="step" data-x="+3000" data-y="0" data-z="-3000" data-scale="1">
+        <p>Initial state</p>
+        <img src='images/JavaScriptMetaprogrammingViaScripting_00_Begin.png' alt="JavaScript Metaprogramming via Scripting" />
+    </div>
+
+    <div id="JavaScriptEvalAsMetaprogrammingExample02" class="step" data-x="+3000" data-y="0"  data-z="-6000" data-scale="1">
+        <p>Simple multiplication</p>
+        <img src='images/JavaScriptMetaprogrammingViaScripting_02_UseFunctionDynamicly.png' alt="Use Function Dynamicly" />
+    </div>
+
+    <div id="JavaScriptEvalAsMetaprogrammingExample03" class="step" data-x="+3000" data-y="0"  data-z="-9000" data-scale="1">
+        <p>Injection values into local execution scope</p>
+        <img src='images/JavaScriptMetaprogrammingViaScripting_03_InjectionValuesIntoLocalExecutionScope.png' alt="Injection Values into Local Execution Scope" />
+    </div>
+
+    <div id="MultiparadigmLanguage" class="step" data-x="+5500" data-y="-50"  data-rotate="-90" data-scale="1">
+        <h1>C# is <strong>multiparadigm</strong> language</h1>
+    </div>
+
+    <div id="AndersHejlsbergCitation" class="step" data-x="+6000" data-y="0" data-scale="1">
+        <p>"<strong>Languages are losing their classifications</strong>. No longer can we say that a language is just an object-oriented language, or just a dynamic language, because so many of them borrow from lots of different ideas</p>
+        <p><em>Anders Hejlsberg</em> talk about C# 3.0</p>
+    </div>
+
+    <div id="MultiparadigmLanguageDetails" class="step" data-x="+7000" data-y="0" data-scale="1">
+        <ul>
+            <li><strong>object-oriented</strong>: class-based and statically typed</li>
+            <li><strong>imperative</strong></li>
+            <li><strong>C# 2.0</strong>: generic programming</li>
+            <li><strong>C# 3.0</strong>: functional/declarative: <strong class="code">LINQ</strong>, <strong class="code">Rx</strong></li>
+            <li><strong>C# 4.0</strong>: dynamic: <strong class="code">DLR</strong>, <strong class="code">microORM</strong></li>
+        </ul>
+    </div>
+
+    <div id="MicrosoftRoslynCTP" class="step" data-x="+9500" data-y="-150"  data-rotate="-90" data-scale="1">
+        <h1>Microsoft® “Roslyn” CTP</h1>
+    </div>
+
+    <div id="MicrosoftRoslynCTPCitation01" class="step" data-x="+10000" data-y="0" data-scale="1">
+        <p><strong>Traditionally, compilers are black boxes</strong>.Source code goes in one end, magic happens in the middle, and object files or assemblies come out the other end.</p>
+    </div>
+
+    <div id="MicrosoftRoslynCTPCitation02" class="step" data-x="+11000" data-y="0" data-scale="1">
+        <p>As compilers perform their magic, they build up deep understanding of the code they are processing, but that knowledge is unavailable to anyone but the compiler implementation wizards.</p>
+    </div>
+
+    <div id="MicrosoftRoslynCTPCitation03" class="step" data-x="+12000" data-y="0" data-scale="1">
+        <p><strong>The core mission of the Roslyn project</strong>: opening up the black boxes and allowing tools and end users to share in the wealth of information compilers have about our code.</p>
+    </div>
+
+    <div id="BootstrappingForCompilers" class="step" data-x="+13500" data-y="-100"  data-rotate="-90" data-scale="1">
+        <h1><strong>Bootstrapping</strong> for compilers</h1>
+    </div>
+
+    <div id="BootstrappingForCompilers01" class="step" data-x="+14000" data-y="0" data-scale="1">
+        <p><strong>Bootstrapping</strong> is the process of writing a compiler in the target programming language which it is intended to compile.</p>
+        <p>Applying this technique leads to a <strong>self-hosting compiler</strong>.</p>
+    </div>
+
+    <div id="CompilerAsService" class="step" data-x="+15500" data-y="-150"  data-rotate="-90" data-scale="1">
+        <h1><strong>Compiler as a Service</strong></h1>
+    </div>
+
+    <div id="Demo01InternalsSyntaxTreesAndHostEnvironment" class="step" data-x="+16000" data-y="0" data-scale="1">
+        <p><strong class="red">Demo #01</strong></p>
+        <p><a href='images\RoslynSyntaxTree_00.png'>Syntax trees</a></p>
+    </div>
+
+    <div id="RoslynVsCodeDom" class="step" data-x="+17000" data-y="0" data-scale="1">
+        <p><a href='http://stackoverflow.com/a/7854697/443366'>Microsoft Roslyn vs. CodeDom</a></p>
+        <p><small>CodeDom is a precursor to Roslyn, but is only marginally related.</small></p>
+        <ul>
+            <li><small><strong>CodeDom</strong> is a simple and (somewhat) langage agnostic way to generate code</small></li>
+            <li><small><strong>Roslyn</strong> has an advantage of building them in managed code is that users can reference the real compilers as libraries from .NET applications</small></li>
+        </ul>
+    </div>
+
+    <div id="RoslynUseCasesList" class="step" data-x="+19000" data-y="0" data-scale="1">
+        <h1><strong>Metaprogramming by …</strong></h1>
+        <ul>
+            <li>Scripting</li>
+            <li>Code generation</li>
+            <li>Dynamic objects and λ-expression</li>
+            <li>Reflection</li>
+        </ul>
+    </div>
+
+    <div id="DemoScript02EvalForCSharpUsingRoslyn" class="step" data-x="+20000" data-y="0" data-scale="1">
+        <p><strong class="red">Demo #02</strong></p>
+        <p>Scripting: <a href='images\JavaScript_Eval_vs_Roslyn_ScriptEngine.png'>`<strong class="code">eval()</strong>`-like for C# using Roslyn</a></p>
+    </div>
+
+    <div id="DemoScript03RoslynScriptVsIronPython" class="step" data-x="+21000" data-y="0" data-scale="1">
+        <p><strong class="red">Demo #03</strong></p>
+        <p>Scripting: Roslyn Script vs. <a href='images\IronPythonScript.png'>IronPython</a></p>
+    </div>
+
+    <div id="DemoScript04RoslynAndT4" class="step" data-x="+22000" data-y="0" data-scale="1">
+        <p><strong class="red">Demo #04</strong></p>
+        <p>Code-as-Data: Roslyn and T4</p>
+        <ul>
+            <li><a href='https://github.com/akimboyko/MetaProgramming/blob/master/MetaProgramming/MetaProgramming.RoslynCTP.Tests/RuntimeTextTemplateTests.cs'>Runtime template transformation</a></li>
+            <li><a href='https://github.com/akimboyko/MetaProgramming/blob/master/MetaProgramming/MetaProgramming.RoslynCTP/CodeAsData.cs'>Code-as-Data</a></li>
+        </ul>
+    </div>
+
+    <div id="DemoScript05ConvertCodeWrittenOnOneLanguageToAnother" class="step" data-x="+23000" data-y="0" data-scale="1">
+        <p><strong class="red">Demo #05</strong></p>
+        <p>Code-as-Data: Convert code written in one language to another</p>
+        <p><a href='images\CodeAsData_ConvertVBtoCSharp.png'>VB → C# and back again</a></p>
+    </div>
+
+    <div id="Note01MefAndDsl" class="step" data-x="+24000" data-y="0" data-scale="1">
+        <p><strong>Note about "Code-as-Data"</strong></p>
+        <ul>
+            <li>Roslyn vs. MEF</li>
+            <li>Roslyn vs. DSL</li>
+        </ul>
+    </div>
+
+    <div id="Note02Lambda" class="step" data-x="+25000" data-y="0" data-scale="1">
+        <p><strong>Note about "Dynamic" programming</strong></p>
+        <ul>
+            <li>Roslyn vs. λ-expression and DLR</li>
+        </ul>
+    </div>
+
+    <div id="DemoScript06Reflection" class="step" data-x="+26000" data-y="0" data-scale="1">
+        <p><strong class="red">Demo #06</strong></p>
+        <p>Reflection/Inspection: <a href='images\RoslynInspection_CalculateCyclomaticComplexity.png'>Cyclomatic complexity</a></p>
+    </div>
+
+    <div id="CornerCases" class="step" data-x="+26500" data-y="-250"  data-rotate="-90" data-scale="1">
+        <h1><strong>Corner cases</strong></h1>
+    </div>
+
+    <div id="CornerCasesList01" class="step" data-x="+27000" data-y="0" data-scale="1">
+        <ul>
+            <li>Breaking changes with compilers</li>
+            <li><strong class="code">dynamic</strong> keyword support</li>
+            <li><strong class="code">async</strong>/<strong class="code">await</strong> keywords</li>
+            <li>Implementation issues of current version</li>
+            <li>Sandbox for scripts</li>
+        </ul>
+    </div>
+
+    <div id="CornerCasesList02" class="step" data-x="+28000" data-y="0" data-scale="1">
+        <ul>
+            <li>Support: <em>Dustin Campbell</em>, <em>Eric Lippert</em>, <em>Kevin Pilch-Bisson</em> and whole team!</li>
+            <li>Roslyn CTP license limitations</li>
+        </ul>
+    </div>
+
+    <div id="References01" class="step" data-x="+29000" data-y="0" data-scale="1">
+        <ul style="">
+            <li><strong><a href='http://msdn.microsoft.com/en-us/hh500769'>The Roslyn Project</a></strong></li>
+            <li><strong><a href='http://www.manning.com/hazzard/'>Metaprogramming in .NET by by <em>@KevinHazzard</em> and <em>@JasonBock</em></a></strong></li>
+            <li><a href='http://scriptcs.net/'>ScriptCS by <em>@gblock</em> and others</a></li>
+        </ul>
+    </div>
+
+    <div id="References02" class="step" data-x="+30000" data-y="0" data-scale="1">
+        <ul>
+            <li><a href='http://channel9.msdn.com/'>Microsoft Channel9</a></li>
+            <li><a href='http://www.dotnetrocks.com/default.aspx?showNum=649'>DotNetRocks #649: <em>Eric Lippert</em> Talks About Project Roslyn</a></li>
+            <li><a href='http://deepfriedbytes.com/podcast/episode-81-looking-at-the-next-net-compilers-aka-ldquo-roslyn-rdquo-project/'>Episode #81: Looking at the Next .NET Compilers AKA “Roslyn” Project with <em>@pilchie</em></a></li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>
