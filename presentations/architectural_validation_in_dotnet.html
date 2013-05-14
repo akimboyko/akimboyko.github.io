@@ -1,0 +1,158 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>ItBrunch Architectural Validation in .Net by @AkimBoyko</title>
+    
+    <meta name="description" content="ItBrunch Architectural Validation in .Net: TDD, AutoFixture, Reflection, RoslynCTP, PostSharp" />
+    <meta name="author" content="Akim Boyko" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <link href="css/architectural_validation.css" rel="stylesheet" />
+    
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+
+<body class="impress-not-supported">
+
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+    </div>
+
+    <div id="impress">
+        <div id="title" class="step" data-x="-200" data-y="0" data-z="0" data-rotate="0" data-scale="4">
+            <h1>Architectural Validation in .Net</h1>
+            <p class='right'>by <em>@AkimBoyko</em></p>
+            <p class='right'><a href="https://github.com/akimboyko/MetaProgramming">GitHub repository</a></p>
+        </div>
+
+        <div id="WordsDefinitions" class="step" data-x="+2500" data-y="0" data-z="0" data-rotate="0" data-scale="1">
+            <p><strong>ἀρχιτέκτων</strong>:  from ἀρχι- "chief" and τέκτων "builder, carpenter, mason"
+                <br/>
+                by <em>@simonbrown</em></p>
+            <p><strong>validation</strong>:  from latin <em>validus-</em> strong
+                <br/>
+                is the process of checking that a software meets specifications and that it fulfills its intended purpose</p>
+        </div>
+
+        <div id="MurphysLaw" class="step" data-x="+2500" data-y="+500" data-z="0" data-rotate="0" data-scale="1">
+            <p>Anything that can go wrong will go wrong<br/>by <em>Edward Aloysius Murphy</em></p>
+        </div>
+
+        <div id="Why" class="step" data-x="+2700" data-y="+850" data-z="0" data-rotate="0" data-scale="1.5">
+            <h1>Почему всегда так?</h1>
+        </div>
+
+        <div id="ProjectContext" class="step" data-x="+2500" data-y="+950" data-z="0" data-rotate="0" data-scale="1">
+            <ul><li>
+                <h1>Context</h1>
+                Hot/cold start with source code
+            </li></ul>
+        </div>
+
+        <div id="ConventionOverConfiguration" class="step" data-x="+2500" data-y="+1050" data-z="0" data-rotate="0" data-scale="1">
+            <ul><li>
+                <h1>Convention over configuration</h1>
+                Coding by convention
+            </li></ul>
+        </div>
+
+        <div id="StaticTyping" class="step" data-x="+2500" data-y="+1150" data-z="0" data-rotate="0" data-scale="1">
+            <ul><li>
+                <h1>Static Typing</h1>
+                Compiled ≠ Ready
+            </li></ul>
+        </div>
+
+        <div id="IntrospectionSearchReturnNullSimple" class="step" data-x="+5000" data-y="0" data-z="0" data-rotate="0" data-scale="1">
+            <p>Roslyn CTP: search for <strong class="code">return null;</strong> statements</p>
+            <div class="code">
+                <pre class="code_block">Func&lt;StatementSyntax, <span style="color: #2b91af">bool</span>&gt; returnNullStatement =
+        PredicateBuilder
+            .True&lt;StatementSyntax&gt;()
+            <span style="color: #008000">// all return statements</span>
+            .And(s =&gt; s <span style="color: #0000ff">is</span> ReturnStatementSyntax)
+            <span style="color: #008000">// with expression</span>
+            .And(s =&gt; (s <span style="color: #0000ff">as</span> ReturnStatementSyntax).Expression != <span style="color: #0000ff">null</span>)
+            <span style="color: #008000">// with expression &quot;null&quot;</span>
+            .And(s =&gt; (s <span style="color: #0000ff">as</span> ReturnStatementSyntax).Expression.Kind == SyntaxKind.NullLiteralExpression)
+                .Compile();</pre></div>
+        </div> 
+
+        <div id="IntrospectionSearchReturnNullSemanticAnalysis" class="step" data-x="+5000" data-y="0" data-z="-2000" data-rotate="0" data-scale="1">
+            <p>Roslyn CTP: search for <strong class="code">return default(T);</strong> statements where T is reference type</p>
+            <div class="code">
+                <pre class="code_block">ExpressionSyntax expressionSyntax = (statement <span style="color: #0000ff">as</span> ReturnStatementSyntax).Expression;
+
+ISemanticModel semanticModel = await semanticModelAsync;
+
+<span style="color: #0000ff">return</span> expressionSyntax != <span style="color: #0000ff">null</span> &amp;&amp;
+     (semanticModel.GetTypeInfo(expressionSyntax).Type == <span style="color: #0000ff">null</span>
+         || semanticModel.GetTypeInfo(expressionSyntax).Type.IsReferenceType);</pre></div>
+        </div>
+
+        <div id="DotNetBuildPipeLine" class="step" data-x="+10000" data-y="0" data-z="0" data-rotate="0" data-scale="1">
+            <div id="main">
+                <h1>.Net build pipeline</h1>
+
+                <div class="window" id="code" style="left: 50px; top: 150px;">
+                    <strong>C# source code</strong>
+                </div>
+
+                <div class="window" id="cil" style="left: 350px; top: 150px;">
+                    <strong>CIL</strong>(Common Intermediate Language)
+                </div>
+
+                <div class="window" id="asm" style="left: 650px; top: 150px;">
+                    <strong>CLR</strong>(Common Language Runtime) 
+                    +
+                    <strong>Machine Instruction</strong>
+                </div>
+
+                <div class="window" id="modified" style="left: 475px; top: 400px;">
+                    <strong>Modified CIL</strong>(Common Intermediate Language)
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="hint">
+        <p>Use a spacebar or arrow keys to navigate</p>
+    </div>
+    <script>
+    if ("ontouchstart" in document.documentElement) { 
+        document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+    }
+    </script>
+
+    <script type="text/javascript"
+            src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js">
+    </script>
+    <script type="text/javascript"
+            src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js">
+    </script>
+
+    <script type="text/javascript" 
+            src="http://jsplumbtoolkit.com/js/jquery.jsPlumb-1.4.0-all-min.js">
+    </script>
+
+    <script type="text/javascript"
+            src="js/architectural_validation.js">
+    </script>
+
+    <script src="js/impress.js"></script>
+    <script>
+        jsPlumb.bind("ready", function() {
+            impress().init();
+        });
+    </script>
+
+    </body>
+</html>

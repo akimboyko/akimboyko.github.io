@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src:local('Open Sans'), 
+    local('OpenSans'),
+    url("../fonts/OpenSans-Regular.ttf") format('truetype'),
+    url("../fonts/OpenSans.woff") format('woff');    
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -24,6 +34,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
+
 body {
     line-height: 1;
 }
@@ -45,8 +56,10 @@ table {
 }
 
 body {
-    font-family: 'PT Sans', sans-serif;
-    min-height: 740px;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    min-height: 800px;
+    padding: 0;
+    margin: 0;
 
     background: rgb(215, 215, 215);
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(240, 240, 240)), to(rgb(190, 190, 190)));
@@ -115,7 +128,7 @@ a:focus {
     box-sizing:         border-box;
 
     font-family: 'PT Serif', georgia, serif;
-    font-size: 48px;
+    font-size: 36px;
     line-height: 1.5;
 }
 
@@ -169,19 +182,6 @@ a:focus {
     padding: 0;
 }
 
-#title .try {
-    font-size: 64px;
-    position: absolute;
-    top: -0.5em;
-    left: 1.5em;
-
-    -webkit-transform: translateZ(20px);
-    -moz-transform:    translateZ(20px);
-    -ms-transform:     translateZ(20px);
-    -o-transform:      translateZ(20px);
-    transform:         translateZ(20px);
-}
-
 #title h1 {
     font-size: 100px;
 
@@ -200,10 +200,6 @@ a:focus {
     -ms-transform:     translateZ(50px);
     -o-transform:      translateZ(50px);
     transform:         translateZ(50px);
-}
-
-.right {
-    text-align: right;
 }
 
 .hint {
@@ -259,16 +255,92 @@ a:focus {
 .impress-enabled          { pointer-events: none }
 .impress-enabled #impress { pointer-events: auto }
 
+#main {
+    margin-top: 44px;
+    margin-left: auto;
+    position: relative;
+    font-size: 80%;
+    margin-right: auto;
+    width: 850px;
+    border-top: 2px solid #456;
+    border-left: 2px solid #456;
+    border-right: 2px solid #456;
+    border-bottom: 2px solid #456;
+    height: 600px;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color:#eaedef;
+}
+
+#main h1
+{
+  text-align: center;
+}
+
+#main .window { 
+    width: 10em;
+    height: 5em;
+    padding: 1em;
+    position: absolute;
+
+    font-size: 15px;
+    line-height: 15px;
+    text-align: center;
+    
+    border: 1px solid black;
+    border-radius: 1em;
+    box-shadow: 2px 2px 19px #e0e0e0;
+
+    background-color: white;
+    opacity: 0.8;
+
+    z-index: 4;
+    -o-box-shadow: 2px 2px 19px #e0e0e0;
+    -webkit-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-border-radius: 0.5em;
+    
+    filter: alpha(opacity=80);
+    cursor: move;
+}
+
 .red {
     color: red;
 }
 
-.code {
-    font-family: Consolas, monospace;
+.right {
+    text-align: right;
 }
 
-.demo {
+.inlineCode {
     font-family: Consolas, monospace;
-    font-weight:bold;
-    color: red;
+
+    background: #ffffff;
+    opacity: 1.0; 
+    
+    border: solid gray;
+    border-width:.05em .05em .05em .05em;
+}
+
+.code {
+    padding:.2em .6em;
+    width:850px;
+
+    font-size: 15px;
+    font-family: Consolas, monospace;
+
+    background: #ffffff;
+    opacity: 1.0; 
+    
+    overflow:auto;
+    border:solid gray;
+    border-width:.1em .1em .1em .1em;
+}
+
+.code_block {
+    margin: 0;
+    line-height: 125%;
 }
