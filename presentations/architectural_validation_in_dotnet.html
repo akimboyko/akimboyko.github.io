@@ -5,9 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=1024" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>ItBrunch Architectural Validation in .Net by @AkimBoyko</title>
+    <title>Architectural Validation in .Net by @AkimBoyko</title>
     
-    <meta name="description" content="ItBrunch Architectural Validation in .Net: TDD, AutoFixture, Reflection, RoslynCTP, PostSharp" />
+    <meta name="description" content="Architectural Validation in .Net: TDD, AutoFixture, Reflection, RoslynCTP, PostSharp" />
     <meta name="author" content="Akim Boyko" />
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
@@ -28,28 +28,38 @@
     <div id="impress">
         <div id="title" class="step" data-x="-200" data-y="0" data-z="0" data-rotate="0" data-scale="4">
             <h1>Architectural Validation in .Net</h1>
-            <p class='right'>by <em>@AkimBoyko</em></p>
-            <p class='right'><a href="https://github.com/akimboyko/MetaProgramming">GitHub repository</a></p>
+            <div class='right'>
+                <p><a href='https://twitter.com/AkimBoyko'>@AkimBoyko</a></p>
+                <p class='right'><a href="https://github.com/akimboyko/MetaProgramming">GitHub repository</a></p>
+                <p><img style='width:150px; height: auto;' src='images\itera_logo.png' alt='Itera logo' /></p>
+            </div>
         </div>
 
         <!-- Intro -->
 
-        <div id="WordsDefinitions" class="step" data-x="+2500" data-y="-750" data-z="0" data-rotate="0" data-scale="1">
-            <p><strong>ἀρχιτέκτων</strong>:  from ἀρχι- "chief" and τέκτων "builder, carpenter, mason"
+        <div id="WordsDefinitionsArchitecture" class="step" data-x="+2500" data-y="-750" data-z="0" data-rotate="0" data-scale="1">
+            <h1>Architecture</h1>
+            <p>As a noun architecture can be summarised as being <em>about structure</em>
+                and is <em>about the decomposition</em> of a product into
+                a collection of components and interactions. 
                 <br/>
-                by <em>@simonbrown</em></p>
-            <p><strong>validation</strong>:  from latin <em>validus-</em> strong
-                <br/>
-                is the process of checking that a software meets specifications and that it fulfills its intended purpose</p>
+                <a href='https://leanpub.com/software-architecture-for-developers'>
+                    Software Architecture for Developers by <em>@simonbrown</em></a></p>
         </div>
 
-        <div id="MurphysLawIntro" class="step" data-x="+2500" data-y="0" data-z="0" data-rotate="0" data-scale="1">
+        <div id="WordsDefinitionsValidation" class="step" data-x="+2500" data-y="0" data-z="0" data-rotate="0" data-scale="1">
+            <h1>Validation</h1>
+            <p>The <em>assurance</em> that a product, service, or system
+                meets the needs of the customer and other identified stakeholders</p>
+        </div>
+
+        <div id="MurphysLawIntro" class="step" data-x="+2500" data-y="+750" data-z="0" data-rotate="0" data-scale="1">
             <p>Anything that can go wrong will go wrong<br/>by <em>Edward Aloysius Murphy</em></p>
         </div>
 
-        <div id="PlasticBycicle" class="step" data-x="+2500" data-y="+750" data-z="0" data-rotate="0" data-scale="1">
+        <div id="PlasticBycicle" class="step" data-x="+2500" data-y="+1500" data-z="0" data-rotate="0" data-scale="1">
             <div align="center"><img src='.\images\plastic_bycicle.jpg' alt='Volvo plastic bycicle'/></div>
-            <p>The fact that not every box contained every part to assemble a bicycle frustrated many customers</p>
+            <p>The fact that not every box contained every part to assemble a bicycle <em>frustrated</em> many customers</p>
         </div>
 
         <!-- WHY -->
@@ -60,35 +70,55 @@
 
         <div id="ProjectContext" class="step" data-x="+4000" data-y="-850" data-z="0" data-rotate="0" data-scale="1">
             <ul><li>
-                <h1>Context</h1>
-                Hot/cold start with source code
+                Project context: Hot/Cold starts
             </li></ul>
         </div>
 
         <div id="ConventionOverConfiguration" class="step" data-x="+4000" data-y="-750" data-z="0" data-rotate="0" data-scale="1">
             <ul><li>
-                <h1>Convention over configuration</h1>
-                Coding by convention
+                Coding Convention vs. Coding by Convention
             </li></ul>
         </div>
 
         <div id="StaticTyping" class="step" data-x="+4000" data-y="-650" data-z="0" data-rotate="0" data-scale="1">
             <ul><li>
-                <h1>Static Typing</h1>
-                Compiled ≠ Ready
+                Static Typing: Compiled ≠ Ready
             </li></ul>
         </div>
 
-        <div id="FailFast" class="step" data-x="+4000" data-y="0" data-z="0" data-rotate="0" data-scale="1">
-            <p><strong>Fail fast!</strong><br/>
-                 A fail-fast system is designed to immediately report any failure or condition that is likely to lead to failure</p>
+        <div id="SampleTypeNameCollisions" class="step" data-x="+4000" data-y="0" data-z="0" data-rotate="0" data-scale="1">
+            <h1>Type Name Collisions</h1>
+            <img src='images\type_name_collision.png' alt='Type Name Collisions with ReSharper' />
+            <p>What to choose: <code class="inlineCode">Iesi.Collections.ISet</code>, 
+                <code class="inlineCode">System.Collections.Generic.ISet</code> or
+                <code class="inlineCode">NPOI.Util.Collections.ISet</code>?</p>
         </div>
 
-        <div id="NotesCodebases" class="step" data-x="+4000" data-y="+750" data-z="0" data-rotate="0" data-scale="1">
-            Differences: 
+        <div id="FailFast" class="step" data-x="+4000" data-y="+750" data-z="0" data-rotate="0" data-scale="1">
+            <h1>Fail fast!</h1>
+            <p>A fail-fast system is designed to immediately report any 
+                failure or condition that is likely to lead to failure</p>
+        </div>
+
+        <div id="NotesCodebases01" class="step" data-x="+4000" data-y="1300" data-z="0" data-rotate="0" data-scale="1">
+            <h1>Differences</h1>
+        </div>
+
+        <div id="NotesCodebases01" class="step" data-x="+4000" data-y="1400" data-z="0" data-rotate="0" data-scale="1">
             <ul>
-                <li>new vs. legacy codebase</li>
-                <li>library vs. web app</li>
+                <li>Greenfield vs. Browfield</li>
+            </ul>
+        </div>
+
+        <div id="NotesCodebases01" class="step" data-x="+4000" data-y="1500" data-z="0" data-rotate="0" data-scale="1">
+            <ul>
+                <li>API vs. enterprise</li>
+            </ul>
+        </div>
+
+        <div id="NotesCodebases01" class="step" data-x="+4000" data-y="1600" data-z="0" data-rotate="0" data-scale="1">
+            <ul>
+                <li>public vs. internal</li>
             </ul>
         </div>
 
@@ -99,21 +129,20 @@
         <!-- Reflection and Introspection -->
 
         <div id="ReflectionVsIntrospection" class="step" data-x="+7000" data-y="-750" data-z="0" data-rotate="0" data-scale="1">
-            <p><strong>Reflection</strong> vs. <strong>Introspection</strong></p>
+            <h1>Reflection vs. Introspection</h1>
         </div>
 
         <div id="CSharpSampleForReturnNull" class="step" data-x="+7000" data-y="0" data-z="0" data-rotate="0" data-scale="1">
-            <h1>C# code with <strong class="code">return null;</strong></h1>
+            <h1>C# code and syntax Tree from Roslyn CTP</h1>
             <div class="code"><pre class="code_block">public</span> <span style="color: #2b91af">object</span> ReturnNullReferenceType()
 {
     <span style="color: #0000ff">return</span> <span style="color: #0000ff">null</span>;
 }</pre></div>
-            <h1>Syntax Tree from Roslyn CTP</h1>
             <div align="center"><img src='.\images\roslyn_syntax_tree_for_return_null.png' alt='Roslyn syntax tree sample'/></div>
         </div>
 
         <div id="IntrospectionCalculateCodeComplexity" class="step" data-x="+7000" data-y="+750" data-z="0" data-rotate="0" data-scale="1">
-            <p>Roslyn CTP: calculate code complexity</p>
+            <h1>Calculate code complexity</h1>
             <div class="code">
                 <pre class="code_block">Func&lt;StatementSyntax, <span style="color: #2b91af">bool</span>&gt; CyclomaticComplexityStatements =
         PredicateBuilder
@@ -128,7 +157,7 @@
         </div>
         
         <div id="IntrospectionSearchReturnNullSimple" class="step" data-x="+7000" data-y="+1500" data-z="0" data-rotate="0" data-scale="1">
-            <p>Roslyn CTP: search for <strong class="code">return null;</strong> statements</p>
+            <h1>Search for <code class="inlineCode">return null;</code> statements</h1>
             <div class="code">
                 <pre class="code_block">Func&lt;StatementSyntax, <span style="color: #2b91af">bool</span>&gt; returnNullStatement =
         PredicateBuilder
@@ -143,7 +172,7 @@
         </div> 
 
         <div id="IntrospectionSearchReturnNullSemanticAnalysis" class="step" data-x="+7000" data-y="+2250" data-z="0" data-rotate="0" data-scale="1">
-            <p>Roslyn CTP: search for <strong class="code">return default(T);</strong> statements where <strong class="code">T</strong> is reference type</p>
+            <h1>Search for <code class="inlineCode">return default(T);</code> statements where <code class="inlineCode">T</code> is reference type</h1>
             <div class="code">
                 <pre class="code_block">ExpressionSyntax expressionSyntax = (statement <span style="color: #0000ff">as</span> ReturnStatementSyntax).Expression;
 
@@ -155,7 +184,8 @@ ISemanticModel semanticModel = await semanticModelAsync;
         </div>
 
         <div id="ReflectionLimitReferencesToAssemblies" class="step" data-x="+7000" data-y="+3000" data-z="0" data-rotate="0" data-scale="1">
-            <p>Reflection: limit references to assemblies</p>
+            <h1>Limit references to assemblies</h1>
+            <p>Using <code class="inlineCode">System.Reflection</code></p>
             <div class="code">
                 <pre class="code_block">[Test, Combinatorial]
 <span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span> TestReferencesIntersection(
@@ -186,18 +216,18 @@ ISemanticModel semanticModel = await semanticModelAsync;
         </div>
 
         <div id="IntrospectionLimitations" class="step" data-x="+7000" data-y="+3750" data-z="0" data-rotate="0" data-scale="1">
+            <h1>Limitations</h1>
             <p>
-                Limitations: 
                 <ul>
                     <li>C#/VB.Net source code should be available</li>
-                    <li>Support of C# features: <strong class="code">dynamic</strong>, <strong class="code">async</strong>, <strong class="code">await</strong></li>
+                    <li>Support of C# features: <code class="inlineCode">dynamic</code>, <code class="inlineCode">async</code>, <code class="inlineCode">await</code></li>
                 </ul>
             </p>
         </div>
 
         <div id="IntrospectionAssertions" class="step" data-x="+7000" data-y="+4500" data-z="0" data-rotate="0" data-scale="1">
+            <h1>Assertions</h1>
             <p>
-                Assertions: 
                 <ul>
                     <li>How to references back to sources?</li>
                     <li>What to do if source code has been changed?</li>
@@ -206,19 +236,19 @@ ISemanticModel semanticModel = await semanticModelAsync;
         </div>
 
         <div id="IntrospectionAssertionsUsingApprovalTests" class="step" data-x="+7000" data-y="+5250" data-z="0" data-rotate="0" data-scale="1">
-            <h1><strong>ApprovalTests</strong> — Capturing Human Intelligence</h1>
-            <img src='.\images\introspection_return_null_with_approvaltests.png' alt="Introspection assertions using ApprovalTests" />
+            <h1>ApprovalTests</h1>
+            <p>Capturing Human Intelligence</p>
+            <img style='margin-left: -100px;' src='.\images\introspection_return_null_with_approvaltests.png' alt="Introspection assertions using ApprovalTests" />
         </div>
 
         <div id="IntrospectionNote" class="step" data-x="+7000" data-y="+6000" data-z="0" data-rotate="0" data-scale="1">
             <p>Note: this is not a replacement for code review!</p>
         </div>
 
-
         <!-- PostSharp -->
 
         <div id="PostSharpArchitectureConstraints" class="step" data-x="+8500" data-y="-750" data-z="0" data-rotate="0" data-scale="1">
-            <p><strong>PostSharp: Architecture Constraints</strong></p>
+            <h1>PostSharp: Architecture Constraints</h1>
         </div>
 
         <div id="DotNetAndPostSharpBuildPipeLine" class="step" data-x="+8500" data-y="0" data-z="0" data-rotate="0" data-scale="1">
@@ -240,7 +270,7 @@ ISemanticModel semanticModel = await semanticModelAsync;
                     <em>Machine Instruction</em>
                 </div>
 
-                <div style="margin-top: 450px;"><h1>PostSharp build pipeline</h1></div>
+                <div style="margin-top: 400px;"><h1>PostSharp build pipeline</h1></div>
 
                 <div class="window" id="modified" style="left: 75px; top: 400px;">
                     <strong>Rewrite:</strong><br/>Modified <em>CLI</em> (Common Intermediate Language)
@@ -252,24 +282,27 @@ ISemanticModel semanticModel = await semanticModelAsync;
                 </div>
 
                 <div class="window" id="initialize" style="left: 625px; top: 400px;">
-                    <strong class="code_box">CompileTimeInitialize</strong>
+                    <strong class="code_box">CompileTimeInitialize</code>
                     <p>Serialize state for runtime</p>
                 </div>
             </div>
         </div>
 
         <div id="PostSharpArchitectureFramework" class="step" data-x="+8500" data-y="+750" data-z="0" data-rotate="0" data-scale="1">
+            <h1>Architecture Framework</h1>
             <p>
-                <strong>Architecture Framework</strong>
                 <ul>
                     <li>Built-In Architecture Constraints</li>
                     <li>Custom Architecture Constraints</li>
+                    <li><code class="inlineCode">ScalarConstraint</code> and
+                        <code class="inlineCode">ReferentialConstraint</code></li>
                 </ul>
             </p>
         </div>
 
         <div id="PocoClassWithTypicalCodeIssues" class="step" data-x="+8500" data-y="+1500" data-z="0" data-rotate="0" data-scale="1">
-            <p>POCO class with typical code issues</p>
+            <h1>POCO class</h1>
+            <p>class with typical code issues</p>
             <div class="code">
                 <pre class="code_block">public</span> <span style="color: #0000ff">class</span> <span style="color: #2b91af">Customer</span>
 {
@@ -287,7 +320,8 @@ ISemanticModel semanticModel = await semanticModelAsync;
         </div>
 
         <div id="VirtualKeywordRequiredForEntities" class="step" data-x="+8500" data-y="+2250" data-z="0" data-rotate="0" data-scale="1">
-            <p>PostSharp: validate that all properties are <strong class="code">public</strong>, <strong class="code">virtual</strong> with getter and setter</p>
+            <h1>Validate constraint</h1>
+            <p>Validate that all properties are <code class="inlineCode">public</code>, <code class="inlineCode">virtual</code> with getter and setter</p>
             <div class="code">
                 <pre class="code_block">[Serializable]
 [MulticastAttributeUsage(MulticastTargets.Property)]
@@ -324,7 +358,7 @@ ISemanticModel semanticModel = await semanticModelAsync;
         </div>
 
         <div id="PostSharpAspectMulticasting" class="step" data-x="+8500" data-y="+3000" data-z="0" data-rotate="0" data-scale="1">
-            <p>PostSharp: aspect multicasting</p>
+            <h1>Multicasting</h1>
             <div class="code">
                 <pre class="code_block"><span style="color: #008000">// Multicast aspect to all properties of classes in namespace</span>
 [assembly: VirtualKeywordRequiredForInstanceProperties(
@@ -333,11 +367,17 @@ ISemanticModel semanticModel = await semanticModelAsync;
 </pre></div>
         </div>
 
-        <div id="PostSharpLimitations" class="step" data-x="+8500" data-y="+3750" data-z="0" data-rotate="0" data-scale="1">
+        <div id="PostSharpCompileTimeError" class="step" data-x="+8500" data-y="+3750" data-z="0" data-rotate="0" data-scale="1">
+            <h1>Compile-time error</h1>
+            <p>Error generated by PostSharp aspect validation</p>
+            <img src='images\postsharp_validation_aspect-virtual_keyword_is_required.png' alt='Compile-time error generated by PostSharp aspect validation' />
+        </div>
+
+        <div id="PostSharpLimitations" class="step" data-x="+8500" data-y="+4500" data-z="0" data-rotate="0" data-scale="1">
+            <h1>Limitations</h1>
             <p>
-                Limitations: 
                 <ul>
-                    <li>License for PostSharp 2/3</li>
+                    <li>License for PostSharp 2 and 3</li>
                     <li>Configuration issues</li>
                 </ul>
             </p>
@@ -352,8 +392,8 @@ ISemanticModel semanticModel = await semanticModelAsync;
         </div>
 
         <div id="References" class="step" data-x="+10000" data-y="+0" data-z="0" data-rotate="0" data-scale="1">
+            <h1>References</h1>
             <p>
-                References: 
                 <ul>
                     <li><a href='http://msdn.microsoft.com/en-us/vstudio/roslyn.aspx'>Microsoft® “Roslyn” CTP</a></li>
                     <li><a href='http://www.postsharp.net/'>PostSharp — Design Pattern Automation</a></li>
