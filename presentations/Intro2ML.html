@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Introduction to Machine Learning</title>
+
+		<meta name="description" content="Using R and F# with examples from Kaggle competition Titanic">
+		<meta name="author" content="Akim Boyko">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Introduction to Machine Learning</h1>
+					<h3>Using R and F# with examples from Kaggle competitions</h3>
+					<p>by Akim Boyko <a href="http://akimboyko.github.io">github</a> / <a href="http://twitter.com/AkimBoyko">twitter</a>
+					</p>
+					<p><img style='width:200px; height: auto; border: 0px; box-shadow: none' 
+                        src='images/itera_logo.png'
+                        alt='Itera logo' /></p>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							A computer program is said to learn from experience _E_ with respect to some class of tasks _T_ and performance measure _P_, if its performance at tasks in _T_, as measured by _P_, improves with experience _E_
+
+							-Tom M. Mitchell
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						## Vapnik–Chervonenkis theory
+
+						The theory is a form of **computational learning** theory, which attempts to explain the learning process from a _statistical_ point of view
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							The purpose of computing is insight, not numbers
+							
+							-Richard Hamming
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Types of Learning
+
+							Using a set of observations to uncover an underlying process
+
+							* A pattern exists
+							* We cannot pin it down mathematically
+							* We have data on it
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Supervised learning
+
+							``(input, correct output)``
+
+							![Supervised learning](./images/SupervisedLearning.png "Supervised learning")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Supervised learning
+
+							``(input, correct output)``
+
+							* Classification
+							* Regression
+							* Scoring
+							* Ranking
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Unsupervised learning
+
+							``(input, ???)``
+
+							![Unsupervised learning](./images/UnsupervisedLearning.png "Unsupervised learning")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Unsupervised learning
+
+							``(input, ???)``
+
+							* Clustering
+							 * K-means
+							 * Hierarchical
+							* Apriori algorithm for finding association rules
+							* Dimension reduction
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Reinforcement learning
+
+							``(input, some output, grade for this output)``
+
+							![Reinforcement learning](./images/ReinforcementLearning.png "Reinforcement learning")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Reinforcement learning
+
+							``(input, some output, grade for this output)``
+
+							* Games/Robots
+							 * [Starfish Self Modeling Robot](http://youtu.be/ehno85yI-sA)
+							 * [Stanford Autonomous Helicopter](http://youtu.be/kN6ifrqwIMY)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Batch vs. On-Line Learning
+
+							``(input, some output, true value after delay/for some price)``
+
+							* Still vs. stream
+							* Active learning
+							 * If the classifier is _unsure_ of the classification, then the classifier _can_ ask for **ground truth** at some **significant cost**
+
+							![Amazon Mechanical Turk](./images/AmazonMechanicalTurk.png "Amazon Mechanical Turk")
+						</script>
+					</section>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Learning puzzle
+
+						![Learning puzzle from 'Learning from Data' course](./images/Puzzle.png "Learning puzzle from 'Learning from Data' course")
+
+						from 'Learning from Data' course
+					</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							![Netflix](./images/Netflix.png "Netflix")
+
+							### Netflix Prize
+							* Netflix provided a training data set of 100,480,507 ratings that 480,189 users gave to 17,770 movies
+							* The qualifying data set contains over 2,817,131 triplets, with grades known only to the jury
+							* In order to win the grand prize of $1,000,000, a participating team had to improve Netflix`s Cinematch by 10%
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Kaggle](./images/Kaggle.png "Kaggle")
+
+							Predictive modelling company
+
+							* Facebook Recruiting Competition
+							* Gender Prediction from Handwriting
+							* Traveling Santa Problem
+							* Galaxy Zoo — The Galaxy Challenge
+							* Flight Quest — Make flying more efficient
+							* and more...
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Titanic
+
+							Machine Learning from Disaster
+
+							![Titanic: Machine Learning from Disaster](./images/Titanic.jpg "Titanic: Machine Learning from Disaster")
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Training Sets
+
+							A training set consists of a set of pairs (x, y), called training examples:
+
+							* `x` — feature vector: categorical/numerical
+							* `y` is the label
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Training Sets
+
+							* y is a real number. In this case, the problem is called _regression_
+							* y is a boolean value true-or-false, more commonly written as +1 and −1, respectively. In this class the problem is _binary classification_
+							* y is a member of some finite set, and each member represents one class. The problem is _multiclass classification_
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Training Sets
+
+							[Trainig and test datasets with description](http://bit.ly/TitanicData)
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Null model
+
+							[R snippet](./samples/NullModel.html)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Null model
+
+							![Null model](./images/NullModel.png "Null model")
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Managing data
+
+							* Cleaning missing (i.e. N/A) values
+							 * Imputation, for example replace with mean
+							 * Add extra control column
+							 * Remove all
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Managing data
+
+							* Data transformation: convert, change type, preprocess
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Managing data
+							
+							* Feature extraction/engineering
+							 * Enable external data sources
+							 * Allow to use unstructured data sources
+							 * Experimentation
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Managing data
+
+							[R snippet](./samples/ManagingData.html)
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Linear model
+
+							![Linear model](./images/LinearModel.png "Linear model")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Linear model
+
+							* Linear classification
+							* Linear regression
+							* Logistic regression
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Non-linear transformation							
+
+							![Non-linear transformation](./images/NonLinearTransformation.png "Non-linear transformation")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Approximation of non linear function
+
+							![Non-linear transformation](./images/ApproxNonLinearFunction.png "Approximation of non linear function")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Linear model
+
+							[R snippet](./samples/LinearModel.html)
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Generalization vs. memorization
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Bias
+
+							Systematic error in the model, such as always underpredicting
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Variance
+
+							Undesirable (but non-systematic) distance between predictions and actual values. Often due to oversensitivity of the model training procedure to small variations in the distribution of training data
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Overfitting
+
+							The Most Important Scientific Problem You`ve Never Heard Of
+							
+							-Nate Silver
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Overfitting
+
+							Features of the model that arise from relations that are in the **training data**, but not representative of the **general population**. 
+
+							Overfit can usually be reduced by acquiring more training data, and by techniques like regularization and bagging
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Overfitting
+
+							![Overfitting](./images/Overfitting.png "Overfitting")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Generalization tradeoff
+
+							![Approximation vs. generalization tradeoff](./images/ApproxVsGenTradeoff.png "Approximation vs. generalization tradeoff")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Approximation vs. generalization tradeoff
+
+							* More complex hypothesis — better approximation
+							* Less complex hypothesis — better generalization
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Model complexity vs. Prediction Error
+
+							![Model complexity vs. Prediction Error](./images/ModelComplexityVsPredictionError.png "Model complexity vs. Prediction Error")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Correlation does not imply causation
+
+							![Internet Explorer vs Murder Rate](./images/IEvsMurderRate.png "Internet Explorer vs Murder Rate")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Correlation does not imply causation
+
+							Money spent on pets (US) correlates with Number of lawyers in California Correlation: 0.998386
+
+							![Spurious Correlations](./images/SpuriousCorrelations.png "Spurious Correlations")
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Error measure
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Confusion matrix
+
+							Evaluating classification models
+
+							![Confusion matrix](./images/ConfusionMatrix.png "Confusion matrix")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Type I and II errors simplified
+
+							![Type I and II errors simplified](./images/TypeIandIIErrors.png "Type I and II errors simplified")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Accuracy
+
+							``(TP+TN)/(TP+FP+FN+TN)``
+
+							We need most of our decisions to be correct
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Precision
+
+							``TP/(TP + FP)``
+
+							Most of what we marked as spam had darn well better be spam
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Recall/Sensitivity
+
+							``TP/(TP+FN)``
+
+							We have to cut a lot of spam, other- wise the user won’t see a benefit
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Root Mean Square Error
+
+							Evaluating scoring/regression models
+
+							![Root Mean Square Error](./images/RMSE.png "Root Mean Square Error")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Accuracy vs. precision
+
+							![Accuracy vs. precision](./images/AccuracyVsPrecision.png "Accuracy vs. precision")
+						</script>
+					</section>
+
+					
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Validation
+
+							The validation set: ``60%/40%`` or ``60%/20%/20%``
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Cross validation
+
+							* Leave-one-out cross-validation
+							* k-fold cross-validation
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Cross validation
+
+							[R snippet](./samples/CrossValidation.html)
+						</script>
+					</section>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Model selection
+
+						Prediction accuracy versus interpretability:
+
+						* Linear models and trees are easy to interpret
+						* Thin-plate splines or support vectors are not
+					</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Decision tree
+
+							Simple model type: they make a prediction that is piecewise constant
+
+							![Decision tree](./images/DecisionTree.png "Decision tree")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Decision tree
+
+							A two-dimensional classification examples in which one of the true decision boundary is _linear_ (Top Row) and another true decision boundary is _non-linear_ (Bottom Row)
+
+							![Decision tree](./images/DecisionTreeBoundary.png "Decision tree")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Decision tree
+
+							[R snippet](./samples/DecisionTree.html)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Random forests
+
+							Random forests provide an improvement over bagged trees by way of a **small tweak** that decorrelates the trees
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Random forests
+
+							[R snippet](./samples/RandomForrest.html)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							If you torture the data enough, nature will always confess
+							
+							-Ronald Coase
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Support Vector Machines
+
+							Linear separable data, difference separated lines.
+
+							Which is better?
+
+							![SVM](./images/SVMLinearSeparableData.png "SVM")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Soft margin
+
+							![Soft margin](./images/SVMSoftMargin.png "Soft margin")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Support vectors in X space
+
+							![Support vectors in X space](./images/SVMMerginInXSpace.png "Support vectors in X space")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## MNIST
+
+							Handwritten digit database
+
+							![MNIST handwritten digit database](./images/MNIST.png "MNIST handwritten digit database")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Support Vector Machines
+
+							[R snippet](./samples/SupportVectorMachines.html)
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							![Programming is not Math](./images/ProgrammingIsNotMath.png "Programming is not Math")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Data Scientist](./images/DataScientist.png "Data Scientist (n.): Person who is better at statistics than any software engineer and better at software engineering than any statistician -Josh Wills")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![R](./images/R.png)
+
+							* dynamic type system!
+							* [CRAN](http://cran.r-project.org/)
+							* [R Studio](http://www.rstudio.com/)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![R as a programming language](./images/RAsProgrammingLanguage.png "R as a programming language")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![F#](./images/fsharp512.png "F#")
+
+							* [Type providers!](http://fsharp.github.io/FSharp.Data/)
+							* REPL
+							* Very dynamic community!
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## F# Data type providers
+
+							![CSV type provider](./images/FSharp.Data.CSVtypeProvider.gif)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## F# Data type providers
+
+							![JSON type provider](./images/FSharp.Data.JSONtypeProvider.gif)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## F# Data type providers
+
+							![WordBank type provider](./images/FSharp.Data.WordBankTypeProdiver.gif)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## F# tricks
+
+							* 64bit
+							* `<gcAllowVeryLargeObjects enabled="true" />`
+							* Maybe: `<gcConcurrent enabled="true"/>`
+							* Maybe: `<gcServer enabled="true"/>`
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Python](./images/Python.png "Python")
+
+							* [scikit-learn](http://scikit-learn.org/stable/)
+							* [NumPy](http://www.numpy.org/)
+							* [Deep Learning](http://deeplearning.net/)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Scala](./images/Scala.png "Scala")
+
+							* [Apache Mahout](http://mahout.apache.org/)
+							* [Apache Spark](https://spark.apache.org/)
+							* [Apache Hadoop](http://hadoop.apache.org/)
+						</script>
+					</section>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						![The Data  Science Venn Diagram](./images/TheDataScienceVennDiagram.png "The Data  Science Venn Diagram")
+
+						[The Data  Science Venn Diagram](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)
+					</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+						* [An Introduction to Statistical Learning with Applications in R Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani](http://www-bcf.usc.edu/~gareth/ISL/)
+						* [The Elements of  Statistical Learning: Data Mining, Inference, and Prediction.Trevor Hastie, Robert Tibshirani, Jerome Friedman](http://statweb.stanford.edu/~tibs/ElemStatLearn/)
+						* [Learning From Data. Yaser S. Abu-Mostafa](https://work.caltech.edu/telecourse.html)
+						* [Practical Data Science with R, Nina Zumel and John Mount](http://www.manning.com/zumel/)
+						* [Machine Learning Projects for .NET Developers. Mathias Brandewinder](http://www.apress.com/9781430267676)
+						* [Titanic: Getting Started With R. Trevor Stephens](http://trevorstephens.com/post/72916401642/titanic-getting-started-with-r)
+						</script>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.pack.js', async: true, callback: function() { hljs.initHighlighting.called = false; hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
