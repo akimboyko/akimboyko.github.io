@@ -57,9 +57,10 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <pre class="r"><code>lmfit &lt;- glm(as.factor(Survived) ~ Pclass + Sex + Pclass:Sex + Age + FamilySize + RelFare
                                     + as.factor(Title),
              family = binomial(logit), 
-             data = trainSet)
-
-summary(lmfit)</code></pre>
+             data = trainSet)</code></pre>
+<pre><code>## Warning: glm.fit: algorithm did not converge
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<pre class="r"><code>summary(lmfit)</code></pre>
 <pre><code>## 
 ## Call:
 ## glm(formula = as.factor(Survived) ~ Pclass + Sex + Pclass:Sex + 
@@ -68,36 +69,36 @@ summary(lmfit)</code></pre>
 ## 
 ## Deviance Residuals: 
 ##    Min      1Q  Median      3Q     Max  
-## -2.795  -0.557  -0.397   0.449   2.486  
+## -2.736  -0.639  -0.481   0.453   2.347  
 ## 
 ## Coefficients:
 ##                         Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)             2.07e+01   2.40e+03    0.01   0.9931    
-## Pclass                 -1.96e+00   3.48e-01   -5.62  2.0e-08 ***
-## Sexmale                -1.86e+01   2.40e+03   -0.01   0.9938    
-## Age                    -3.89e-02   1.30e-02   -2.99   0.0028 ** 
-## FamilySize             -4.04e-01   1.01e-01   -4.00  6.4e-05 ***
-## RelFare                 4.11e-03   3.68e-03    1.12   0.2639    
-## as.factor(Title)Lady   -1.59e+01   2.40e+03   -0.01   0.9947    
-## as.factor(Title)Master  2.59e+00   1.31e+00    1.97   0.0483 *  
-## as.factor(Title)Miss   -1.34e+01   2.40e+03   -0.01   0.9955    
-## as.factor(Title)Mlle   -1.12e+00   2.77e+03    0.00   0.9997    
-## as.factor(Title)Mr      6.64e-02   1.16e+00    0.06   0.9545    
-## as.factor(Title)Mrs    -1.25e+01   2.40e+03   -0.01   0.9959    
-## as.factor(Title)Ms      1.19e+00   3.39e+03    0.00   0.9997    
-## as.factor(Title)Rev    -1.46e+01   1.05e+03   -0.01   0.9889    
-## as.factor(Title)Sir     1.00e+00   1.53e+00    0.66   0.5110    
-## Pclass:Sexmale          9.79e-01   3.77e-01    2.59   0.0095 ** 
+## (Intercept)            -2.25e+14   1.27e+14   -1.78    0.076 .  
+## Pclass                 -1.91e+00   3.93e-01   -4.85  1.2e-06 ***
+## Sexmale                 2.25e+14   1.27e+14    1.78    0.076 .  
+## Age                    -3.04e-02   1.23e-02   -2.48    0.013 *  
+## FamilySize             -4.04e-01   9.82e-02   -4.12  3.8e-05 ***
+## RelFare                 2.64e-03   5.54e-03    0.48    0.633    
+## as.factor(Title)Lady    4.73e+15   1.27e+14   37.37  &lt; 2e-16 ***
+## as.factor(Title)Master  2.46e+00   1.41e+00    1.74    0.081 .  
+## as.factor(Title)Miss    2.25e+14   1.27e+14    1.78    0.076 .  
+## as.factor(Title)Mlle    2.25e+14   1.27e+14    1.78    0.076 .  
+## as.factor(Title)Mr     -3.29e-01   1.26e+00   -0.26    0.795    
+## as.factor(Title)Mrs     2.25e+14   1.27e+14    1.78    0.076 .  
+## as.factor(Title)Ms      2.25e+14   1.27e+14    1.78    0.076 .  
+## as.factor(Title)Rev    -2.49e+01   1.25e+05    0.00    1.000    
+## as.factor(Title)Sir     1.29e-01   1.55e+00    0.08    0.934    
+## Pclass:Sexmale          1.02e+00   4.09e-01    2.49    0.013 *  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 792.04  on 593  degrees of freedom
-## Residual deviance: 472.13  on 578  degrees of freedom
-## AIC: 504.1
+##     Null deviance: 791.10  on 593  degrees of freedom
+## Residual deviance: 494.23  on 578  degrees of freedom
+## AIC: 526.2
 ## 
-## Number of Fisher Scoring iterations: 15</code></pre>
+## Number of Fisher Scoring iterations: 25</code></pre>
 <pre class="r"><code>prediction &lt;- round(predict(lmfit, cvSet, type=&quot;response&quot;))
 
 confusionMatrix(as.factor(cvSet$Survived), prediction)</code></pre>
@@ -105,25 +106,25 @@ confusionMatrix(as.factor(cvSet$Survived), prediction)</code></pre>
 ## 
 ##           Reference
 ## Prediction   0   1
-##          0 174  10
-##          1  35  78
+##          0 168  15
+##          1  32  82
 ##                                         
-##                Accuracy : 0.848         
-##                  95% CI : (0.803, 0.887)
-##     No Information Rate : 0.704         
-##     P-Value [Acc &gt; NIR] : 4.71e-09      
+##                Accuracy : 0.842         
+##                  95% CI : (0.795, 0.881)
+##     No Information Rate : 0.673         
+##     P-Value [Acc &gt; NIR] : 3.73e-11      
 ##                                         
-##                   Kappa : 0.664         
-##  Mcnemar's Test P-Value : 0.000347      
+##                   Kappa : 0.656         
+##  Mcnemar's Test P-Value : 0.0196        
 ##                                         
-##             Sensitivity : 0.833         
-##             Specificity : 0.886         
-##          Pos Pred Value : 0.946         
-##          Neg Pred Value : 0.690         
-##              Prevalence : 0.704         
-##          Detection Rate : 0.586         
-##    Detection Prevalence : 0.620         
-##       Balanced Accuracy : 0.859         
+##             Sensitivity : 0.840         
+##             Specificity : 0.845         
+##          Pos Pred Value : 0.918         
+##          Neg Pred Value : 0.719         
+##              Prevalence : 0.673         
+##          Detection Rate : 0.566         
+##    Detection Prevalence : 0.616         
+##       Balanced Accuracy : 0.843         
 ##                                         
 ##        'Positive' Class : 0             
 ## </code></pre>

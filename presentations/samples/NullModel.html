@@ -66,7 +66,7 @@ test  &lt;- read.csv(&quot;./data/test.csv&quot;,  sep=',', header=TRUE)</code><
 ##      0      1 
 ## 0.6162 0.3838</code></pre>
 <pre class="r"><code>test$Survived &lt;- 0</code></pre>
-<p>Submiting <em>everyones die</em> will retult in <strong>62.6% results to be correct</strong></p>
+<p>Submitting <em>everyone die</em> will result in <strong>62.6% results to be correct</strong></p>
 <p>Lets check ‘Sex’ columns. It is only column together with ‘Name’ that has no <code>N/A</code>. Is there any relationship between columns ‘Survived’ and ‘Sex’?</p>
 <pre class="r"><code>prop.table(table(train$Sex, train$Survived), 1)</code></pre>
 <pre><code>##         
@@ -85,7 +85,7 @@ test  &lt;- read.csv(&quot;./data/test.csv&quot;,  sep=',', header=TRUE)</code><
 <p>Let it be our Null model based on gender only</p>
 <pre class="r"><code>test$Survived &lt;- 0
 test$Survived[test$Sex == 'female'] &lt;- 1</code></pre>
-<p>Submiting <em>survived based on gender</em> will retult in <strong>75.6% results to be correct</strong></p>
+<p>Submitting <em>survived based on gender</em> will result in <strong>75.6% results to be correct</strong></p>
 </div>
 
 
