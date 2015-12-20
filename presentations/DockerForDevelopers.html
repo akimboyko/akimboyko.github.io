@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Docker containers for developers</title>
+
+		<meta name="description" content="Docker containers for developers">
+		<meta name="author" content="Akim Boyko">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/github.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Docker</h1>
+					<h3>for developers</h3>
+					<p>by Akim Boyko <a href="http://akimboyko.github.io">github</a> / <a href="http://twitter.com/AkimBoyko">twitter</a>
+					</p>
+					<p><img style='width:200px; height: auto; border: 0px; box-shadow: none' 
+                        src='images/itera_logo.png'
+                        alt='Itera logo' /></p>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							![Docker](./images/docker.png "Docker logo")
+						</script>
+					</section>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## What is docker?
+					
+						The idea behind Docker is to create portable lightweight containers 
+						for software applications
+					</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## What is container?
+
+							![Container itself](./images/container00.jpg "Container itself")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## What is container?
+
+							![Blueprint](./images/container_blueprint.jpg "Container blueprint")
+						</script>
+					</section>
+
+					<!--
+					<section data-markdown>
+						<script type="text/template">
+							## Cargo matrix
+
+							| **Products**   | **Transportation methods**  |
+							|----------------|:----------------------------|
+							| goods          | ships                       |
+							| electronics    | trains                      |
+							| raw materials  | trucks                      |
+							| …              | …                           |
+						</script>
+					</section>
+					-->
+
+					<section data-markdown>
+						<script type="text/template">
+							## Cargo matrix — pre-1960
+
+							![Cargo matrix](./images/cargo_matrix_—_pre1960.png "Cargo matrix")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Cargo matrix — with shipping containers
+
+							![Cargo matrix — with shipping containers](./images/cargo_matrix_—_with_shipping_containers.png "Cargo matrix — with shipping containers")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## IT container matrix
+
+							![IT container matrix](./images/container_matrix.png "IT container matrix")
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Container
+
+							![virtual machine vs. docker](./images/virtual_machine_vs._docker.png "Virtual Machine vs. Docker")
+
+							* Containers - not VM
+							* Running on a host
+							* All containers share the kernel
+							* Based on an image
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Container
+
+							* Docker is processes composition
+							* Containers should be ephemeral and disposable
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Docker image
+
+							![Docker image](./images/docker_images.png "Docker image")
+
+							* Immutable
+							* No memory state, only filesystem
+							* Layered — only delta to previous layer
+							* All persisted data should be on volumes
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							### Boot2docker
+
+							![boot2docker](./images/boot2docker.png "boot2docker")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							### Kitematic
+
+							![kitematic](./images/kitematic.png "kitematic")
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							### Configuration
+
+							![docker configuration](./images/docker_configuration_in_action.png "docker configuration")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							### Development environment
+
+							![docker development](./images/docker_development_in_action.png "docker development")
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Docker Hub
+
+							* [Docker Hub](https://registry.hub.docker.com/)
+							* [MySQL](https://registry.hub.docker.com/_/mysql/)
+							* [node.js](https://registry.hub.docker.com/_/node/)
+							* [scipy](https://registry.hub.docker.com/search?q=scipy)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## How to configure?
+
+							```
+							MAINTAINER Akim Boyko "akim dot boyko at gmail.com" version: 0.1
+ 
+							ENV METADIR /opt/meta
+							RUN mkdir -p $METADIR
+							 
+							RUN sudo apt-get update && apt-get -y install software-properties-common \
+							    libc6 libc6-dev libicu-dev git gcc g++ build-essential python2.7 \
+							    && apt-get clean
+
+							WORKDIR $METADIR
+							RUN git clone https://github.com/meta-toolkit/meta.git .
+							 
+							RUN apt-get -y purge git && apt-get -y autoremove 
+							 
+							VOLUME /mnt/programming
+							```
+
+							[full sample](https://gist.github.com/akimboyko/cbac31370b50d685b240)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Docker demo
+
+							* Virturalbox with Boot2docker vm
+							* `docker pull ubuntu:latest`
+							* `docker images`
+							* `sudo mount -t vboxsf couchdb /mnt/couchdb`
+							* `docker run --rm -ti ubuntu /bin/bash`
+							* `docker run -d ubuntu ping google.com`
+							* `docker ps`
+							* `docker logs CONTAINER`
+							* `docker stop CONTAINER`
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							# What Docker can do?
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							* Isolating an application dependencies
+							* Creating an application image and replicating it
+							* Creating ready to start applications that are easily distributable
+							* Allowing easy and fast scalation of instances
+							* Testing out applications and disposing them afterwards
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							## Docker ecosystem
+
+							* [Docker Compose](https://github.com/docker/compose)
+							* [Docker Swarm](https://github.com/docker/swarm)
+							* Docker Hub (public/private/on prem)
+							* [weave](http://weave.works/)
+							* [tutum](https://www.tutum.co/)
+							* [panamax](http://panamax.io/)
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							# Why containers?
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Why containers?](./images/container01.jpg "Why containers?")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Why containers?](./images/container02.jpg "Why containers?")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Why containers?](./images/container03.png "Why containers?")
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Why containers?](./images/container04.jpg "Why containers?")
+
+							[@kelseyhightower](https://twitter.com/kelseyhightower/status/530795002369433602)
+						</script>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							![Why containers?](./images/container05.jpg "Why containers?")
+
+							[I see they`re using the same consultants as us @managerspeak](https://twitter.com/managerspeak/status/558558786617884672)
+						</script>
+					</section>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## How to start?
+		
+						[The best way to understand Docker is to try it!](https://www.docker.com/tryit/)                                        
+					</script>
+				</section>
+
+				<!--
+				<section data-markdown>
+					<script type="text/template">
+						![QRcode actors](./images/QRcodeActors.png "QRcode actors")
+		
+						[bit.ly/FSharpActors](http://bit.ly/FSharpActors)
+
+						[bit.ly/FSharpActorsEx](http://bit.ly/FSharpActorsEx)                                        
+					</script>
+				</section>
+				-->
+				
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.pack.js', async: true, callback: function() { hljs.initHighlighting.called = false; hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
