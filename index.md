@@ -13,7 +13,7 @@ C#, F#, C++, PowerShell, Java, Scala, R, SQL and NoSQL
 National Technical University of Ukraine 'Kyiv Polytechnic Institute' — masters degree, Computer-aided Design Systems
 
 # Certifications and MOOCs
-* Certified ScrumMaster by Scrum Alliance 2012
+* [Certified ScrumMaster by Scrum Alliance 2012](http://bcert.me/ssmrhavi)
 * C# 4.0 by Brainbench (Transcript ID#: 10718474) 2012
 * .Net 4.0 by Brainbench (Transcript ID#: 10718474) 2012
 * Coursera
