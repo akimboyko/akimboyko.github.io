@@ -1,0 +1,8 @@
+title: Akim Boyko
+description: Tech Lead and Data Science @ ITERA
+google_analytics: UA-39162070-1
+show_downloads: true
+theme: jekyll-theme-minimal
+
+gems:
+  - jekyll-mentions
